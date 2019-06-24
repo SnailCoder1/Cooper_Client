@@ -3,6 +3,7 @@ import DisplayCooperResult from './Components/DisplayCooperResult';
 import InputFields from "./Components/InputFields";
 import LoginForm from './Components/LoginForm';
 import { authenticate } from './Modules/Auth';
+import { Container, Header,  Divider, Segment, Grid, Message, Button } from 'semantic-ui-react'
 
 
 class App extends Component {
@@ -58,27 +59,49 @@ class App extends Component {
       } else {
         renderLogin = (
           <>
-            <button id="login" onClick={() => this.setState({ renderLoginForm: true })}>Login</button>
+            <Button id="login" onClick={() => this.setState({ renderLoginForm: true })}>Login</Button>
             <p>{this.state.message}</p>
           </>
         )
       }
     }
     return (
-      <div>
-        <InputFields 
-          inputChangeHandler={this.onChange.bind(this)}
-        />
+      <>
+        <Container>
+          <Header as="h2" textAlign='center'>
+            {/* <Header textAlign='center'> */}
+              THE COOPER TEST
+            {/* </Header> */}
+          </Header>
 
-        <DisplayCooperResult
-          distance={this.state.distance}
-          gender={this.state.gender}
-          age={this.state.age}
-        />
-      
-        {renderLogin}
+          <Divider></Divider>
 
-      </div>
+          <Segment>
+            <InputFields 
+              inputChangeHandler={this.onChange.bind(this)}
+            />
+          </Segment>
+
+          <Segment>
+            <DisplayCooperResult
+              distance={this.state.distance}
+              gender={this.state.gender}
+              age={this.state.age}
+            />
+          </Segment>
+
+          <Segment>
+            <Grid container columns={1}>
+              <Grid.Column>
+                <Message>
+                  {renderLogin}
+                </Message>
+              </Grid.Column>
+            </Grid>
+          </Segment>
+
+        </Container>
+      </>  
     );
   }
 }
