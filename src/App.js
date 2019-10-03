@@ -38,7 +38,9 @@ class App extends Component {
   }
 
   render() {
-    let renderLogin;
+		let renderLogin;
+		let renderSignUpMessage;
+		let renderLogOut;
     let user;
 
     if (this.state.authenticated === true) {
@@ -68,10 +70,10 @@ class App extends Component {
     return (
       <>
         <Container>
-          <Header as="h2" textAlign='center'>
-            {/* <Header textAlign='center'> */}
-              THE COOPER TEST
-            {/* </Header> */}
+          <Header as="h2">
+						<Header.Content>
+							THE COOPER TEST
+						</Header.Content>
           </Header>
 
           <Divider></Divider>
@@ -82,21 +84,29 @@ class App extends Component {
             />
           </Segment>
 
-          <Segment>
-            <DisplayCooperResult
-              distance={this.state.distance}
-              gender={this.state.gender}
-              age={this.state.age}
-            />
-          </Segment>
+					<Divider></Divider>
 
           <Segment>
-            <Grid container columns={1}>
+						<Message>
+							<DisplayCooperResult
+								distance={this.state.distance}
+								gender={this.state.gender}
+								age={this.state.age}
+							/>
+						</Message>				
+          </Segment>
+
+					<Divider></Divider>
+
+          <Segment>
+            <Grid container columns={2}>
               <Grid.Column>
                 <Message>
                   {renderLogin}
                 </Message>
               </Grid.Column>
+								{renderSignUpMessage}
+								{renderLogOut}
             </Grid>
           </Segment>
 
