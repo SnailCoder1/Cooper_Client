@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import DisplayCooperResult from './Components/DisplayCooperResult';
 import InputFields from "./Components/InputFields";
 import LoginForm from './Components/LoginForm';
+import SignUpForm from ".Components/SignUpForm";
 import { authenticate } from './Modules/Auth';
 import { Container, Header,  Divider, Segment, Grid, Message, Button } from 'semantic-ui-react'
 
@@ -14,10 +15,15 @@ class App extends Component {
       gender: 'female',
       age: '',
       renderLoginForm: false,
+      renderSignUpMessage: false,
       authenticated: false,
       email: '',
       password: '',
-      message: ''
+      passwordConfirmation: '',
+      message: '',
+      entrySaved: false,
+      renderIndex: false,
+      updateIndex: ''
     }
   }
 
@@ -37,17 +43,83 @@ class App extends Component {
     }
   }
 
+  async onSignUp(e) {
+    e.preventDefault();
+    let resp = await authenticateSignUp(this.state.email, this.state.password, this.state.passwordConfirmation)
+    if (resp.authenticated === true) {
+      this.setState({ authenticated: true });
+    } else {
+      this.setState({ message: resp.message, renderSignUpForm: false})
+    }
+  }
+
+  async onLogout(e) {
+    e.preventDefault();
+    let resp = await authenticateSignOut()
+    if(resp.authenticated === true) {
+      this.setState({ authenticated: false });;
+      window.sessionStorage.clear();
+      this.setState({ message: "Logged out successfuly." })
+      this.setState({ renderLoginForm: false })
+      this.setState({ renderSignUpForm: false});
+      setTimeout(function () { window.location.reload("true"); });
+    } else {
+      this.setState({ message: resp.message })
+    }
+  }
+
+  entryHandler() {
+    this.setState({ entrySaved: true, updateIndex: true });
+  }
+
+  updateIndex() {
+    this.setState({ updateIndex: false });
+  }
+
+  handleGenderChange(value) {
+    this.setState({ gender: value})
+  }
+
+  onChange(event) {
+    this.setState({
+      [event.target.id]: event.target.value,
+      entrySaved: false
+    })
+  }
+
+  reset(e) {
+    window.location.reload(true)
+  }
+
+  resetForm(e) {
+    this.setState({ distance: "", age: "" })
+    document.getElementById("calculationForm").reset()
+  }
+
   render() {
 		let renderLogin;
-		let renderSignUpMessage;
+		let renderSignUp;
 		let renderLogOut;
     let user;
+    let errorMessage;
+    let renderSignUpMessage;
+    
 
     if (this.state.authenticated === true) {
       user = JSON.parse(sessionStorage.getItem('credentials')).uid;
       renderLogin = (
         <p>Hi {user}</p>
       )
+      renderSignUpMessage = (
+        {renderSignUp}
+      )
+      renderLogOut = (
+        <Button id="logout" onClick={this.onLogout.bind(this)}>Logout</Button>
+      )
+
+      if (this.state.renderIndex === true) {
+        
+      }
     } else {
       if (this.state.renderLoginForm === true) {
         renderLogin = (
