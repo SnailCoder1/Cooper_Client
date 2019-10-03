@@ -33,4 +33,4 @@ const SignUpForm = (props) => {
     </Form>
   )
 }
-export default SignUpForm
+export default SignUpForm;

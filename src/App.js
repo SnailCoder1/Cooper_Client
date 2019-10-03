@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import DisplayCooperResult from './Components/DisplayCooperResult';
 import InputFields from "./Components/InputFields";
 import LoginForm from './Components/LoginForm';
-import SignUpForm from ".Components/SignUpForm";
-import { authenticate } from './Modules/Auth';
+import SignUpForm from "./Components/SignUpForm";
+import { authenticate, authenticateSignUp, authenticateSignOut } from './Modules/Auth';
 import { Container, Header,  Divider, Segment, Grid, Message, Button } from 'semantic-ui-react'
 
 
@@ -80,13 +80,6 @@ class App extends Component {
     this.setState({ gender: value})
   }
 
-  onChange(event) {
-    this.setState({
-      [event.target.id]: event.target.value,
-      entrySaved: false
-    })
-  }
-
   reset(e) {
     window.location.reload(true)
   }
@@ -99,7 +92,7 @@ class App extends Component {
   render() {
 		let renderLogin;
 		let renderSignUp;
-		let renderLogOut;
+		let renderLogout;
     let user;
     let errorMessage;
     let renderSignUpMessage;
@@ -113,7 +106,7 @@ class App extends Component {
       renderSignUpMessage = (
         {renderSignUp}
       )
-      renderLogOut = (
+      renderLogout = (
         <Button id="logout" onClick={this.onLogout.bind(this)}>Logout</Button>
       )
 
@@ -216,7 +209,6 @@ class App extends Component {
           <Segment>
             <InputFields 
               inputChangeHandler={this.onChange.bind(this)}
-              inputChangeHandler={this.onChange.bind(this)}
               handleGenderChange={this.handleGenderChange.bind(this)}
               resetFormState={this.resetForm.bind(this)}
             />
@@ -236,7 +228,7 @@ class App extends Component {
 							/>
 						</Message>				
           </Segment>
-          
+
         </Container>
       </>  
     );
