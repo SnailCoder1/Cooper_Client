@@ -1,20 +1,30 @@
 import React from 'react';
+import { Form, Button } from 'semantic-ui-react'
 
 const LoginForm = (props) => {
   return (
-    <form id="login-form">
-      <div>
-        <label>Email</label>
-        <input id="email" onChange={props.inputChangeHandler}></input>
-      </div>
 
-      <div>
-        <label>Password</label>
-        <input id="password" onChange={props.inputChangeHandler}></input>
-      </div>
-      <button onClick={(e) => props.loginHandler(e)} id="submit">Submit</button>
-    </form>
+    <Form type="medium" id="login-form">
+      <Form.Input
+        fluid
+        id="email"
+        placeholder="Email"
+        onChange={props.inputChangeHandler}
+      />
+
+      <Form.Input
+        fluid
+        type="password"
+        id="password"
+        placeholder="Password"
+        onChange={props.inputChangeHandler}
+      />
+
+      <Button compact color="teal" onClick={(e) => props.loginHandler(e)} id="submit">Submit</Button>
+      <Button compact color="teal" onClick={(e) => props.resetHandler(e)}>Reset</Button>
+
+    </Form>
   )
 }
 
-export default LoginForm;
+export default LoginForm

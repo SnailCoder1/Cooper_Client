@@ -5,12 +5,14 @@ const SignUpForm = (props) => {
   return (
     <Form id="sign-up-form">
       <Form.Imput
+			fluid
       id="email"
       placeholder="Email"
       onchange={props.inputChangeHandler}
       />
 
     <Form.Imput
+			fluid
       type="password"
       id="password"
       placeholder="Password"
@@ -18,6 +20,7 @@ const SignUpForm = (props) => {
       />
 
     <Form.Imput
+			fluid
       type="password"
       id="passwordConfirmation"
       placeholder="passwordConfirmation"
