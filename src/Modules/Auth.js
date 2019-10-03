@@ -14,6 +14,37 @@ const authenticate = async (email, password) => {
   }
 };
 
+const authenticateSignUp = async (email, password, passwordConfirmation) => {
+  const path = apiUrl + '/auth/';
+  try {
+    let response = await axios.post(path, { email: email, password: password, password_confirmation: passwordConfirmation })
+    await storeAuthCredentials(response)
+    sessionStorage.setItem('current_user', JSON.stringify({ id: response.data.data.id }));
+    return { authenticated: true }
+  } catch (error) {
+    return { authenticated: false, message: error.response.data.errors.full_messages[0] }
+  }
+};
+
+const authenticateSignOut = async () => {
+  const path = apiUrl + '/auth/sign_out';
+  let headers = await sessionStorage.getItem("credentials");
+  headers = JSON.parse(headers);
+  headers = {
+    ...headers,
+    "Content-type": "application/json",
+    Accept: "application/json"
+  };
+
+  try {
+    let response = await axios.delete(path, { headers: headers });
+    await storeAuthCredentials(response)
+    return { authenticated: false }
+  } catch (error) {
+    return { authenticated: true, message: error.response.data.errors[0] }
+  }
+};
+
 const storeAuthCredentials = ({ data, headers }) => {
   return new Promise((resolve) => {
     const uid = headers['uid'],
@@ -32,4 +63,4 @@ const storeAuthCredentials = ({ data, headers }) => {
   })
 };
 
-export { authenticate, storeAuthCredentials }
+export { authenticate, authenticateSignUp, authenticateSignOut, storeAuthCredentials }
