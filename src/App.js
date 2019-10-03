@@ -117,28 +117,76 @@ class App extends Component {
         <Button id="logout" onClick={this.onLogout.bind(this)}>Logout</Button>
       )
 
-      if (this.state.renderIndex === true) {
+      // if (this.state.renderIndex === true) {
         
-      }
+      // }
     } else {
-      if (this.state.renderLoginForm === true) {
+      if (this.state.renderLoginForm === true && this.state.renderSignUpForm === false) {
         renderLogin = (
           <>
             <LoginForm 
               loginHandler={this.onLogin.bind(this)}
               inputChangeHandler={this.onChange.bind(this)}
+              resetHandler={this.reset.bind(this)}
             />
           </>
+        )
+
+        renderSignUp = (
+          <Button id="sign-up" onClick={() => this.setState({ renderSignUpForm: true, renderLoginForm: false, message: '' })}>Sign Up</Button>
+        )
+        renderSignUpMessage = (
+          <Message>
+            { renderSignUp }
+          </Message>
+        )
+      } else if (this.state.renderLoginForm === false && this.state.renderSignUp === true) {
+        renderLogin = (
+          <>
+            <Button id="login" onClick={() => this.setState({ renderLoginForm: true, renderSignUpForm: false, message: '' })}>Login</Button>
+            {/* <p>{this.state.message}</p> */}
+          </>
+        )
+        renderSignUp = (
+          <SignUpForm
+            signUpHandler={this.onSignUp.bind(this)}
+            inputChangeHandler={this.onChange.bind(this)}
+            resetHandler={this.reset.bind(this)}
+          />
+        )
+        renderSignUpMessage = (
+          <Message>
+            {renderSignUp}
+          </Message>
         )
       } else {
         renderLogin = (
           <>
-            <Button id="login" onClick={() => this.setState({ renderLoginForm: true })}>Login</Button>
-            <p>{this.state.message}</p>
+            <Button id="login" onClick={() => this.setState({ renderLoginForm: true, renderSignUpForm: false, message: '' })}>Login</Button>
           </>
+        )
+        renderSignUp = (
+          <>
+            <Button id="sign-up" onClick={() => this.setState({ renderSignUpForm: true, renderLoginForm: false, message: '' })}>Sign Up</Button>
+          </>
+        )
+        renderSignUpMessage = (
+          <Message>
+            {renderSignUp}
+          </Message>
         )
       }
     }
+    if (this.state.authenticated === true) {
+      errorMessage = ''
+    } else if (this.state.authenticated === false && this.state.message !== '') {
+      errorMessage = (
+        <Message>
+          <p><b>{this.state.message}</b></p>
+        </Message>
+      )
+    }
+    
     return (
       <>
         <Container>
@@ -151,8 +199,26 @@ class App extends Component {
           <Divider></Divider>
 
           <Segment>
+            <Grid container columns={2}>
+              <Grid.Column>
+                <Message>
+                  {renderLogin}
+                </Message>
+              </Grid.Column>
+              <Grid.Column>
+                {renderSignUpMessage}
+                {renderLogout}
+              </Grid.Column>
+            </Grid>
+            {errorMessage}
+          </Segment>
+
+          <Segment>
             <InputFields 
               inputChangeHandler={this.onChange.bind(this)}
+              inputChangeHandler={this.onChange.bind(this)}
+              handleGenderChange={this.handleGenderChange.bind(this)}
+              resetFormState={this.resetForm.bind(this)}
             />
           </Segment>
 
@@ -163,25 +229,14 @@ class App extends Component {
 							<DisplayCooperResult
 								distance={this.state.distance}
 								gender={this.state.gender}
-								age={this.state.age}
+                age={this.state.age}
+                authenticated={this.state.authenticated}
+                entrySaved={this.state.entrySaved}
+                entryHandler={this.entryHandler.bind(this)}
 							/>
 						</Message>				
           </Segment>
-
-					<Divider></Divider>
-
-          <Segment>
-            <Grid container columns={2}>
-              <Grid.Column>
-                <Message>
-                  {renderLogin}
-                </Message>
-              </Grid.Column>
-								{renderSignUpMessage}
-								{renderLogOut}
-            </Grid>
-          </Segment>
-
+          
         </Container>
       </>  
     );
