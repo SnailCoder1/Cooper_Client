@@ -15,7 +15,7 @@ class App extends Component {
       gender: 'female',
       age: '',
       renderLoginForm: false,
-      renderSignUpMessage: false,
+      renderSignUpForm: false,
       authenticated: false,
       email: '',
       password: '',
@@ -25,12 +25,6 @@ class App extends Component {
       renderIndex: false,
       updateIndex: ''
     }
-  }
-
-  onChange(event) {
-    this.setState({
-      [event.target.id]: event.target.value
-    });
   }
 
   async onLogin(e) {
@@ -80,12 +74,19 @@ class App extends Component {
     this.setState({ gender: value})
   }
 
+  onChange(event) {
+    this.setState({
+      [event.target.id]: event.target.value,
+      entrySaved: false
+    })
+  }
+
   reset(e) {
     window.location.reload(true)
   }
 
   resetForm(e) {
-    this.setState({ distance: "", age: "" })
+    this.setState({ distance: '', age: '' })
     document.getElementById("calculationForm").reset()
   }
 
@@ -110,34 +111,44 @@ class App extends Component {
         <Button id="logout" onClick={this.onLogout.bind(this)}>Logout</Button>
       )
 
-      // if (this.state.renderIndex === true) {
-        
-      // }
+      if (this.state.renderIndex === true) {
+        performanceDataIndex = (
+          <>
+            <DisplayPerformanceData
+              updateIndex={this.state.updateIndex}
+              indexUpdated={this.indexUpdated.bind(this)}
+            />
+            <Button onClick={() => this.setState({ renderIndex: false })}>Hide past entries</Button>
+          </>
+        )
+      } else {
+        performanceDataIndex = (
+          <Button id="show-index" onClick={() => this.setState({ renderIndex: true })}>Show past entries</Button>
+        )
+      }
     } else {
       if (this.state.renderLoginForm === true && this.state.renderSignUpForm === false) {
         renderLogin = (
           <>
-            <LoginForm 
+            <LoginForm
               loginHandler={this.onLogin.bind(this)}
               inputChangeHandler={this.onChange.bind(this)}
               resetHandler={this.reset.bind(this)}
             />
           </>
         )
-
         renderSignUp = (
           <Button id="sign-up" onClick={() => this.setState({ renderSignUpForm: true, renderLoginForm: false, message: '' })}>Sign Up</Button>
         )
         renderSignUpMessage = (
           <Message>
-            { renderSignUp }
+            {renderSignUp}
           </Message>
         )
-      } else if (this.state.renderLoginForm === false && this.state.renderSignUp === true) {
+      } else if (this.state.renderLoginForm === false && this.state.renderSignUpForm === true) {
         renderLogin = (
           <>
             <Button id="login" onClick={() => this.setState({ renderLoginForm: true, renderSignUpForm: false, message: '' })}>Login</Button>
-            {/* <p>{this.state.message}</p> */}
           </>
         )
         renderSignUp = (
@@ -179,14 +190,14 @@ class App extends Component {
         </Message>
       )
     }
-    
+
     return (
       <>
         <Container>
-          <Header as="h2">
-						<Header.Content>
-							THE COOPER TEST
-						</Header.Content>
+          <Header as="h1">
+            <Header.Content>
+              THE COOPER TEST
+                </Header.Content>
           </Header>
 
           <Divider></Divider>
@@ -207,32 +218,33 @@ class App extends Component {
           </Segment>
 
           <Segment>
-            <InputFields 
+            <InputFields
               inputChangeHandler={this.onChange.bind(this)}
               handleGenderChange={this.handleGenderChange.bind(this)}
               resetFormState={this.resetForm.bind(this)}
             />
           </Segment>
 
-					<Divider></Divider>
+          <Divider horizontal>Wait for your physical assessment...</Divider>
 
           <Segment>
-						<Message>
-							<DisplayCooperResult
-								distance={this.state.distance}
-								gender={this.state.gender}
+            <Message>
+              <DisplayCooperResult
+                distance={this.state.distance}
+                gender={this.state.gender}
                 age={this.state.age}
                 authenticated={this.state.authenticated}
                 entrySaved={this.state.entrySaved}
                 entryHandler={this.entryHandler.bind(this)}
-							/>
-						</Message>				
+              />
+            </Message>
           </Segment>
 
+          {performanceDataIndex}
+
         </Container>
-      </>  
+      </>
     );
   }
 }
-
 export default App;
