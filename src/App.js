@@ -5,7 +5,7 @@ import LoginForm from './Components/LoginForm';
 import SignUpForm from './Components/SignUpForm';
 import { authenticate, authenticateSignUp, authenticateSignOut } from './Modules/Auth.js';
 import DisplayPerformanceData from './Components/DisplayPerformanceData';
-import { Container, Grid, Divider, Header, Segment, Button, Message, } from 'semantic-ui-react'
+import { Container, Grid, Divider, Header, Segment, Button, Message, Icon} from 'semantic-ui-react'
 
 class App extends Component {
   constructor(props) {
@@ -138,7 +138,7 @@ class App extends Component {
           </>
         )
         renderSignUp = (
-          <Button id="sign-up" onClick={() => this.setState({ renderSignUpForm: true, renderLoginForm: false, message: '' })}>Sign Up</Button>
+          <Button id="sign-up"  onClick={() => this.setState({ renderSignUpForm: true, renderLoginForm: false, message: '' })}>Sign Up</Button>
         )
         renderSignUpMessage = (
           <Message>
@@ -190,11 +190,12 @@ class App extends Component {
         </Message>
       )
     }
-
     return (
       <>
         <Container>
-          <Header as="h1">
+        <Divider></Divider>
+
+          <Header as="h1" textAlign='center'>
             <Header.Content>
               THE COOPER TEST
                 </Header.Content>
@@ -225,7 +226,7 @@ class App extends Component {
             />
           </Segment>
 
-          <Divider horizontal>Wait for your physical assessment...</Divider>
+          <Divider horizontal>Result loading...</Divider>
 
           <Segment>
             <Message>
@@ -247,4 +248,5 @@ class App extends Component {
     );
   }
 }
+
 export default App;
