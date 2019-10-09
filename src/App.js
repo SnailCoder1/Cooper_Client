@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import DisplayCooperResult from './Components/DisplayCooperResult';
-import InputFields from "./Components/InputFields";
+import InputFields from './Components/InputFields';
 import LoginForm from './Components/LoginForm';
-import SignUpForm from "./Components/SignUpForm";
-import { authenticate, authenticateSignUp, authenticateSignOut } from './Modules/Auth';
-import { Container, Header,  Divider, Segment, Grid, Message, Button } from 'semantic-ui-react'
-
+import SignUpForm from './Components/SignUpForm';
+import { authenticate, authenticateSignUp, authenticateSignOut } from './Modules/Auth.js';
+import DisplayPerformanceData from './Components/DisplayPerformanceData';
+import { Container, Grid, Divider, Header, Segment, Button, Message, } from 'semantic-ui-react'
 
 class App extends Component {
   constructor(props) {
@@ -43,20 +43,20 @@ class App extends Component {
     if (resp.authenticated === true) {
       this.setState({ authenticated: true });
     } else {
-      this.setState({ message: resp.message, renderSignUpForm: false})
+      this.setState({ message: resp.message, renderSignUpForm: false })
     }
   }
 
   async onLogout(e) {
     e.preventDefault();
     let resp = await authenticateSignOut()
-    if(resp.authenticated === true) {
-      this.setState({ authenticated: false });;
+    if (resp.authenticated === false) {
+      this.setState({ authenticated: false });
       window.sessionStorage.clear();
-      this.setState({ message: "Logged out successfuly." })
-      this.setState({ renderLoginForm: false })
-      this.setState({ renderSignUpForm: false});
-      setTimeout(function () { window.location.reload("true"); });
+      this.setState({ message: "You have successfuly logged out." });
+      this.setState({ renderLoginForm: false });
+      this.setState({ renderSignUpForm: false });
+      setTimeout(function () { window.location.reload("true"); }, 2000);
     } else {
       this.setState({ message: resp.message })
     }
@@ -66,12 +66,12 @@ class App extends Component {
     this.setState({ entrySaved: true, updateIndex: true });
   }
 
-  updateIndex() {
+  indexUpdated() {
     this.setState({ updateIndex: false });
   }
 
   handleGenderChange(value) {
-    this.setState({ gender: value})
+    this.setState({ gender: value })
   }
 
   onChange(event) {
@@ -82,22 +82,22 @@ class App extends Component {
   }
 
   reset(e) {
-    window.location.reload(true)
+    window.location.reload(true);
   }
 
   resetForm(e) {
-    this.setState({ distance: '', age: '' })
+    this.setState({ distane: '', age: '' })
     document.getElementById("calculationForm").reset()
   }
 
   render() {
-		let renderLogin;
-		let renderSignUp;
-		let renderLogout;
+    let renderLogin;
+    let renderSignUp;
+    let renderLogout;
     let user;
+    let performanceDataIndex;
     let errorMessage;
     let renderSignUpMessage;
-    
 
     if (this.state.authenticated === true) {
       user = JSON.parse(sessionStorage.getItem('credentials')).uid;

@@ -1,6 +1,8 @@
 import axios from 'axios'
 import { storeAuthCredentials } from './Auth'
 
+const apiUrl = 'https://crafted-cooper-api.herokuapp.com/api/v1';
+
 const saveData = async (result, distance) => {
   let headers = await sessionStorage.getItem("credentials");
   headers = JSON.parse(headers);

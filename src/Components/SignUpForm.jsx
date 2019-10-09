@@ -9,28 +9,29 @@ const SignUpForm = (props) => {
       id="email"
       placeholder="Email"
       onchange={props.inputChangeHandler}
-    />
+      />
 
-    <Form.Imput
-			fluid
-      type="password"
-      id="password"
-      placeholder="Password"
-      onchange={props.inputChangeHandler}
-    />
+      <Form.Imput
+        fluid
+        type="password"
+        id="password"
+        placeholder="Password"
+        onchange={props.inputChangeHandler}
+      />
 
-    <Form.Imput
-			fluid
-      type="password"
-      id="passwordConfirmation"
-      placeholder="password Confirmation"
-      onchange={props.inputChangeHandler}
-    />
+      <Form.Imput
+        fluid
+        type="password"
+        id="passwordConfirmation"
+        placeholder="password Confirmation"
+        onchange={props.inputChangeHandler}
+      />
 
-    <Button compact color="teal" onClick={(e) => props.signUpHandler(e)} id="submit">Submit</Button>
-    <Button compact color="teal" onClick={(e) => props.resetHandler(e)}>Reset</Button>
+      <Button compact color="teal" onClick={(e) => props.signUpHandler(e)} id="submit">Submit</Button>
+      <Button compact color="teal" onClick={(e) => props.resetHandler(e)}>Reset</Button>
     
     </Form>
   )
 }
-export default SignUpForm;
+
+export default SignUpForm
