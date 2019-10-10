@@ -5,7 +5,7 @@ import LoginForm from './Components/LoginForm';
 import SignUpForm from './Components/SignUpForm';
 import { authenticate, authenticateSignUp, authenticateSignOut } from './Modules/Auth.js';
 import DisplayPerformanceData from './Components/DisplayPerformanceData';
-import { Container, Grid, Divider, Header, Segment, Button, Message, Icon} from 'semantic-ui-react'
+import { Container, Grid, Divider, Header, Segment, Button, Message } from 'semantic-ui-react';
 
 class App extends Component {
   constructor(props) {
@@ -105,7 +105,9 @@ class App extends Component {
         <p>Hi {user}</p>
       )
       renderSignUpMessage = (
-        {renderSignUp}
+        <Message hidden>
+          {renderSignUp}
+        </Message>
       )
       renderLogout = (
         <Button id="logout" onClick={this.onLogout.bind(this)}>Logout</Button>

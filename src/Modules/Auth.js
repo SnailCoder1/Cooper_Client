@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const apiUrl = 'http://localhost:3000/api/v1';
+const apiUrl = 'https://crafted-cooper-api.herokuapp.com/api/v1';
 
 const authenticate = async (email, password) => {
   const path = apiUrl + '/auth/sign_in';
@@ -35,7 +35,6 @@ const authenticateSignOut = async () => {
     "Content-type": "application/json",
     Accept: "application/json"
   };
-
   try {
     let response = await axios.delete(path, { headers: headers });
     await storeAuthCredentials(response)
