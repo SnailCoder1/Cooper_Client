@@ -20,8 +20,8 @@ const LoginForm = (props) => {
         onChange={props.inputChangeHandler}
       />
 
-      <Button compact onClick={(e) => props.loginHandler(e)} id="submit">Submit</Button>
-      <Button compact onClick={(e) => props.resetHandler(e)}>Reset</Button>
+      <Button onClick={(e) => props.loginHandler(e)} id="submit">Submit</Button>
+      <Button onClick={(e) => props.resetHandler(e)}>Reset</Button>
 
     </Form>
   )

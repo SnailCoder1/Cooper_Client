@@ -2,8 +2,9 @@ import React from "react"
 import { Form, Button } from "semantic-ui-react"
 
 const SignUpForm = (props) => {
+
   return (
-    <Form id="sign-up-form">
+    <Form  type="medium" id="sign-up-form">
       <Form.Input
 			fluid
       id="email"
@@ -27,8 +28,8 @@ const SignUpForm = (props) => {
         onchange={props.inputChangeHandler}
       />
 
-      <Button compact onClick={(e) => props.signUpHandler(e)} id="submit">Submit</Button>
-      <Button compact onClick={(e) => props.resetHandler(e)}>Reset</Button>
+      <Button onClick={(e) => props.signUpHandler(e)} id="submit">Submit</Button>
+      <Button onClick={(e) => props.resetHandler(e)}>Reset</Button>
     
     </Form>
   )

@@ -1,68 +1,50 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Project Title
 
-## Available Scripts
+`The Cooper Test Challenge`
 
-In the project directory, you can run:
+# Problem Statement
 
-### `npm start`
+We have a client request to build a fitness tracking application. The idea is that the app will allow users to track their condition using a specific test called The Cooper Test.
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+The challenge is to build a software solution that will make it possible not to only make the calculation, but to record the data over time. Another requirement is that the app should have functionality that presents historical data of tests if a user has saved any historical data.
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+# Prerequisites
 
-### `npm test`
+You must have `Ruby`, `Ruby on Rails`, `Node.js`, `Bundler` and `PostgreSQL` installed in your system to be able to view this app and run all feature, unit and acceptance tests. After forking the repository run `bundle install` so that you download all the gems used in the project.
 
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+# Installing
 
-### `npm run build`
+* To fire up the rails API server, first you will have to create and migrate the databases. To do that, you run in your terminal `rails db:create` and `rails db:migrate`. For the server to activate, run `rails server` in your terminal.
+* To fire up the react client, run `npm start` in your terminal.
 
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
+# Running the tests
 
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
+* The API was unit tested using Rspec. To run the tests in your terminal use `bundle exec rspec`.
+* The client was tested using Cypress and Enzyme. To run the acceptance tests of Cypress use `npm run cy:open`. To run the react component Enzyme tests use `npm run test`.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+# Built With
 
-### `npm run eject`
+* [Ruby version 2.4.1](https://www.ruby-lang.org/en/)
+* [Ruby on Rails version 5.2.0](https://rubyonrails.org/)
+* [React](https://reactjs.org/)
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+# Tested With
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+* [Rspec - Behvavior Driven Development for Ruby](https://rspec.info/)
+* [Cypress - a complete end-to-end testing experience](https://www.cypress.io/) 
+* [Jest & Enzyme testing frameworks for React](https://www.npmjs.com/package/jest-enzyme)
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+# Deployment
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+* The API was deployed using Heroku. The link to access it is [here](https://crafted-cooper-api.herokuapp.com).
+* The CLIENT was deployed via Netlify. You can visit it [here](https://1cooper.netlify.com/).
 
-## Learn More
+<!-- You can use the following credentials if you want to see the application in full action.
+* email: *user@mail.com*
+* password: *password*
+ -->
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+# Authors
 
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+* **SnailCoder1** - [GitHub](https://github.com/SnailCoder1) - [Portfolio](https://boa.netlify.com/)
+* **stefankarlberg** - [GitHub](https://github.com/stefankarlberg) - [Portfolio](https://mystifying-einstein-390384.netlify.com/)
